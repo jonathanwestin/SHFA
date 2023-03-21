@@ -1,7 +1,7 @@
 <template>
 <div>
   <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
-  <h1 class="text-3xl m-8">SHFA</h1>
+  <h1 class="text-3xl m-8">SHFAz</h1>
 <div class="w-3/4 mx-8">
     <div class="relative flex items-center">
       <input type="text" id="search" name="search" placeholder="Search Image Database" class="border border-gray-400 py-3 pl-6 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black">
