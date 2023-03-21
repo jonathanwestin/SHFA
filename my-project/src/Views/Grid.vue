@@ -1,8 +1,8 @@
 <template>
-<div v-on:click="closeDropdown">hi
-<div class="w-3/4 mx-8">>
+<div>
   <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
   <h1 class="text-3xl m-8">SHFA</h1>
+<div class="w-3/4 mx-8">
     <div class="relative flex items-center">
       <input type="text" id="search" name="search" placeholder="Search Image Database" class="border border-gray-400 py-3 pl-6 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black">
       <div class="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -15,6 +15,30 @@
           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 3</a>
         </div>
       </div>
+    </div>
+  </div>
+
+   <div class="flex justify-between h-screen">
+    <div
+      class="w-1/3 bg-gray-200 flex items-center justify-center text-gray-700 text-2xl cursor-pointer"
+      :class="{ 'w-full': panel === 1 }"
+      @click="panel = 1"
+    >
+      Panel 1
+    </div>
+    <div
+      class="w-1/3 bg-gray-300 flex items-center justify-center text-gray-700 text-2xl cursor-pointer"
+      :class="{ 'w-1/4': panel !== 2, 'w-full': panel === 2 }"
+      @click="panel = 2"
+    >
+      Panel 2
+    </div>
+    <div
+      class="w-1/3 bg-gray-400 flex items-center justify-center text-gray-700 text-2xl cursor-pointer"
+      :class="{ 'w-1/4': panel !== 3, 'w-full': panel === 3 }"
+      @click="panel = 3"
+    >
+      Panel 3
     </div>
   </div>
 
@@ -36,7 +60,6 @@
         <p>{{ restaurant.attributes.description }}</p>
       </li>
     </ul>
-    <p></p>
     
   </div>
 </div>
@@ -54,7 +77,8 @@ export default defineComponent({
     return {
       items: [50, 75, 75, 100, 50, 50, 75, 150, 125, 175, 50, 100, 125],
       restaurants: [],
-      showDropdown: false,
+      showDropdown: true,
+      panel: 1,
     }
   },
   mounted() {
@@ -62,16 +86,19 @@ export default defineComponent({
       .then(response => response.json())
       .then(data => {
         this.restaurants = data;
-        console.log(data);
       });
+    document.addEventListener('click', this.closeDropdown);
   },
   methods: {
-    closeDropdown(event) {
-      if (!event.target.closest('#dropdown')) {
-        this.showDropdown = false;
-      }
-    },
+  closeDropdown(event) {
+    if (event.target.closest('#dropdown-toggle')) {
+      return; // Ignore clicks on the dropdown toggle
+    }
+    if (!event.target.closest('#dropdown')) {
+      this.showDropdown = false;
+    }
   },
+},
 })
 </script>
 
