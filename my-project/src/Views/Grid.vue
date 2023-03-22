@@ -1,8 +1,8 @@
 <template>
 <div>
   <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
-  <h1 class="text-3xl m-8">SHFAz</h1>
-<div class="w-3/4 mx-8">
+  <h1 class="text-3xl m-8">SHFA</h1>
+<div class="w-3/4 mx-8 m-8">
     <div class="relative flex items-center">
       <input type="text" id="search" name="search" placeholder="Search Image Database" class="border border-gray-400 py-3 pl-6 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black">
       <div class="absolute inset-y-0 right-0 flex items-center pr-3">
@@ -18,31 +18,16 @@
     </div>
   </div>
 
-   <div class="flex justify-between h-screen">
-    <div
-      class="w-1/3 bg-gray-200 flex items-center justify-center text-gray-700 text-2xl cursor-pointer"
-      :class="{ 'w-full': panel === 1 }"
-      @click="panel = 1"
-    >
-      Panel 1
-    </div>
-    <div
-      class="w-1/3 bg-gray-300 flex items-center justify-center text-gray-700 text-2xl cursor-pointer"
-      :class="{ 'w-1/4': panel !== 2, 'w-full': panel === 2 }"
-      @click="panel = 2"
-    >
-      Panel 2
-    </div>
-    <div
-      class="w-1/3 bg-gray-400 flex items-center justify-center text-gray-700 text-2xl cursor-pointer"
-      :class="{ 'w-1/4': panel !== 3, 'w-full': panel === 3 }"
-      @click="panel = 3"
-    >
-      Panel 3
-    </div>
+  <div class="flex h-screen w-screen">
+  <div class="flex-grow bg-gray-200 transition-all duration-500"
+       :class="{ 'w-full': showThreePanels, 'w-1/2': !showThreePanels }">
+    <p>First Panel</p>
   </div>
-
-  <div class="max-w-lg mt-10 mx-6 lg:mx-auto">
+  <div class="flex-grow bg-gray-400 transition-all duration-500 overflow-auto"
+       :class="{ 'w-full': showThreePanels, 'w-1/2': !showThreePanels }"
+       @click="toggleThreePanels">
+    <p>Second Panel</p>
+    <div class="max-w-lg mt-10 mx-6 lg:mx-auto">
     <MasonryWall :items="items" :ssr-columns="1" :column-width="100" :gap="16">
       <template #default="{ item, index }">
         <div
@@ -53,15 +38,20 @@
         </div>
       </template>
     </MasonryWall>
-    <h1 class="font-bold">Restaurants:</h1>
     <ul>
       <li v-for="restaurant in restaurants.data" :key="restaurant.id">
         <h2>{{ restaurant.attributes.name}}</h2>
         <p>{{ restaurant.attributes.description }}</p>
       </li>
     </ul>
-    
   </div>
+  </div>
+  <div class="flex-grow bg-gray-600 transition-all duration-500"
+       :class="{ 'w-full': showThreePanels, 'w-1/2': showThreePanels, 'w-0': !showThreePanels }">
+    <p>Third Panel</p>
+  </div>
+</div>
+
 </div>
 </template>
 
@@ -75,10 +65,10 @@ export default defineComponent({
   },
   data() {
     return {
-      items: [50, 75, 75, 100, 50, 50, 75, 150, 125, 175, 50, 100, 125],
+      items: [50, 75, 75, 100, 50, 50, 75, 150, 125, 175, 50, 100, 125, 50, 75, 75, 100, 50, 50, 75, 150, 125, 175, 50, 100, 125],
       restaurants: [],
-      showDropdown: true,
-      panel: 1,
+      showDropdown: false,
+      showThreePanels: false,
     }
   },
   mounted() {
@@ -90,20 +80,16 @@ export default defineComponent({
     document.addEventListener('click', this.closeDropdown);
   },
   methods: {
-  closeDropdown(event) {
-    if (event.target.closest('#dropdown-toggle')) {
-      return; // Ignore clicks on the dropdown toggle
-    }
-    if (!event.target.closest('#dropdown')) {
-      this.showDropdown = false;
-    }
-  },
+    toggleThreePanels() {
+      this.showThreePanels = !this.showThreePanels;
+    },
 },
 })
 </script>
 
 
 <style scoped>
+
 </style>
 
 
