@@ -24,14 +24,19 @@
     </div>
   </div>
 
+  <div class="split-container">
   <div class="flex h-screen w-screen">
   <div class="flex-grow bg-gray-200 transition-all duration-500"
        :class="{ 'w-full': showThreePanels, 'w-1/2': !showThreePanels }">
-    <p>First Panel</p>
+      <Map />
   </div>
+  <!-- Panel 2 -->
   <div class="flex-grow bg-gray-400 transition-all duration-500 overflow-auto"
        :class="{ 'w-full': showThreePanels, 'w-1/2': !showThreePanels }"
        @click="toggleThreePanels">
+ <!--  <div class="relative">
+  <button class="absolute top-0 right-0 m-2 p-2 bg-blue-500 text-white rounded-lg">
+  </button> -->
     <p>Second Panel</p>
    <div class="max-w-lg mt-10 mx-6 lg:mx-auto">
   <div class="p-6">
@@ -53,23 +58,24 @@
     </li>
   </ul>
 </div>
-  </div>
+</div>
   <div class="flex-grow bg-gray-600 transition-all duration-500"
        :class="{ 'w-full': showThreePanels, 'w-1/2': showThreePanels, 'w-0': !showThreePanels }">
     <p>Third Panel</p>
   </div>
 </div>
-
+</div>
 </div>
 </template>
 
 <script lang="ts">
 import MasonryWall from '@yeger/vue-masonry-wall'
+import Map from '../components/Map.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: {
-    MasonryWall,
+    MasonryWall, Map
   },
   data() {
     return {
@@ -97,7 +103,6 @@ export default defineComponent({
 
 
 <style scoped>
-
 </style>
 
 
