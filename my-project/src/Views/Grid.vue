@@ -24,21 +24,22 @@
     </div>
   </div>
 
+  <!-- Start of Container -->
   <div class="split-container">
   <div class="flex h-screen w-screen">
-  <div class="flex-grow bg-gray-200 transition-all duration-500"
-       :class="{ 'w-full': showThreePanels, 'w-1/2': !showThreePanels }">
+  <!-- Panel 1 -->
+  <div  id="split-0" class="flex-grow bg-gray-200 transition-all duration-500"
+       :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }">
       <Map />
   </div>
   <!-- Panel 2 -->
-  <div class="flex-grow bg-gray-400 transition-all duration-500 overflow-auto"
-       :class="{ 'w-full': showThreePanels, 'w-1/2': !showThreePanels }"
+  <div id="split-1" class="flex-grow bg-gray-400 transition-all duration-500 overflow-auto" 
+       :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }"
        @click="toggleThreePanels">
  <!--  <div class="relative">
   <button class="absolute top-0 right-0 m-2 p-2 bg-blue-500 text-white rounded-lg">
   </button> -->
-    <p>Second Panel</p>
-   <div class="max-w-lg mt-10 mx-6 lg:mx-auto">
+  <div class="max-w-lg mt-10 mx-6 lg:mx-auto">
   <div class="p-6">
     <MasonryWall :items="items" :ssr-columns="1" :column-width="100" :gap="16">
       <template #default="{ item, index }">
@@ -51,20 +52,29 @@
       </template>
     </MasonryWall>
   </div>
-  <ul>
+ <!--  <ul> Fetch for API
     <li v-for="restaurant in restaurants.data" :key="restaurant.id">
       <h2>{{ restaurant.attributes.name}}</h2>
       <p>{{ restaurant.attributes.description }}</p>
     </li>
-  </ul>
+  </ul> -->
 </div>
 </div>
-  <div class="flex-grow bg-gray-600 transition-all duration-500"
-       :class="{ 'w-full': showThreePanels, 'w-1/2': showThreePanels, 'w-0': !showThreePanels }">
-    <p>Third Panel</p>
-  </div>
+<!-- Panel 3 -->
+<transition name="slide">
+<div id="split-2" class="flex-grow bg-gray-600 transition-all duration-500"
+      :class="{ 'w-1/3': showThreePanels, 'w-0': !showThreePanels }" v-show="showThreePanels">
+    <button @click="toggleThreePanels" class="btn btn-circle m-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
+</div>
+</transition>
+
+
 </div>
 </div>
+<!-- End of Container -->
+
 </div>
 </template>
 
@@ -72,6 +82,7 @@
 import MasonryWall from '@yeger/vue-masonry-wall'
 import Map from '../components/Map.vue'
 import { defineComponent } from 'vue'
+import Split from 'split.js';
 
 export default defineComponent({
   components: {
@@ -86,6 +97,12 @@ export default defineComponent({
     }
   },
   mounted() {
+    Split(['#split-0', '#split-1', '#split-2'], {
+    minSize: 50,
+    dragInterval: 1,
+    gutterSize: 10,
+    gutterAlign: 'start',
+  })
     fetch("http://localhost:1337/api/restaurants")
       .then(response => response.json())
       .then(data => {
@@ -96,6 +113,7 @@ export default defineComponent({
   methods: {
     toggleThreePanels() {
       this.showThreePanels = !this.showThreePanels;
+      console.log('toggle!')
     },
 },
 })
@@ -103,6 +121,21 @@ export default defineComponent({
 
 
 <style scoped>
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 200ms ease-in;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(100%);
+}
+
+.slide-enter-to,
+.slide-leave-from {
+  transform: translateX(0);
+}
+
 </style>
 
 

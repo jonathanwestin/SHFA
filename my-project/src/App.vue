@@ -1,15 +1,18 @@
+<template>
+  <div>
+  <Grid />
+  </div>
+</template>
+
 <script>
-import Grid from './Views/Grid.vue'
+import Grid from './Views/Grid.vue';
 
 export default {
-  components: { Grid }
-}
+  components: { Grid },
+  mounted() {
+  },
+};
 </script>
-
-<template>
-  <Grid />
-  
-</template>
 
 <style scoped>
 

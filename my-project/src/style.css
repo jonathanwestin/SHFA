@@ -7,14 +7,34 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #989898;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+body 
+{
+ /*  background-color: #989898;
+  color: rgba(255, 255, 255, 0.87); */
+}
+
+#app > div > div > div.split-container > div > div:nth-child(2)
+{
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+  cursor: col-resize;
+  background-color: #8e8e8e;
+  background-repeat: no-repeat;
+  background-position: 50%;
+} 
+
+#app > div > div > div.split-container > div > div:nth-child(4)
+{
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+  cursor: col-resize;
+  background-color: #8e8e8e;
+  background-repeat: no-repeat;
+  background-position: 50%;
 }
 
