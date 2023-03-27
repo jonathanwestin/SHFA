@@ -2,27 +2,24 @@
 <div>
   <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
   <h1 class="text-3xl m-8">SHFA</h1>
-<div class="w-3/4 mx-8 m-8">
-    <div class="relative flex items-center">
-      <input type="text" id="search" name="search" placeholder="Search Image Database" class="border border-gray-400 py-3 pl-6 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black drop-shadow-lg">
-      <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-        <svg id="dropdown-toggle" class="w-5 h-5 text-gray-400 cursor-pointer" fill="currentColor" viewBox="0 0 20 20" v-on:click="showDropdown = !showDropdown">
-          <path fill-rule="evenodd" d="M13.853 12.146a1 1 0 0 1-1.414 1.414l-1.147-1.147a4.5 4.5 0 1 1 1.414-1.414l1.147 1.147zm3.708 3.708a1 1 0 0 1-1.414 1.414l-3.8-3.8a6 6 0 1 1 1.414-1.414l3.8 3.8zM6.5 10a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" clip-rule="evenodd"></path>
-        </svg>
-        <div id="dropdown" class="absolute z-10 left-10 mt-2 py-2 w-48 bg-white rounded-md shadow-xl" v-if="showDropdown">
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 1</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 2</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 3</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 4</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 5</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 6</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 7</a>
-          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 8</a>
-
-        </div>
-      </div>
-    </div>
+ <div class="w-1/2 m-8 mb-32 flex">
+  <div class="relative w-full">
+    <input type="text" id="search" name="search" placeholder="Search Image Database" class="border border-gray-400 py-3 pl-6 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black drop-shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute cursor-pointer top-4 right-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24" @click="showDropDown" stroke="currentColor">
+      <path fill-rule="evenodd" d="M13.853 12.146a1 1 0 0 1-1.414 1.414l-1.147-1.147a4.5 4.5 0 1 1 1.414-1.414l1.147 1.147zm3.708 3.708a1 1 0 0 1-1.414 1.414l-3.8-3.8a6 6 0 1 1 1.414-1.414l3.8 3.8zM6.5 10a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" clip-rule="evenodd"></path>
+    </svg>
   </div>
+  <div id="dropdown" class="absolute z-10 top-12 right-[275px] py-2 w-1/4 bg-white rounded-md shadow-xl" v-if="showDropdown">
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 1</a>
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 2</a>
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 3</a>
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 4</a>
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 5</a>
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 6</a>
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 7</a>
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 8</a>
+  </div>
+</div>
 
   <!-- Start of Container -->
   <div class="split-container">
@@ -62,7 +59,7 @@
 </div>
 <!-- Panel 3 -->
 <transition name="slide">
-<div id="split-2" class="flex-grow bg-gray-600 transition-all duration-500"
+<div id="split-2" class="flex-grow bg-gray-600"
       :class="{ 'w-1/3': showThreePanels, 'w-0': !showThreePanels }" v-show="showThreePanels">
     <button @click="toggleThreePanels" class="btn btn-circle m-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -111,9 +108,13 @@ export default defineComponent({
     document.addEventListener('click', this.closeDropdown);
   },
   methods: {
-    toggleThreePanels() {
+    toggleThreePanels() 
+    {
       this.showThreePanels = !this.showThreePanels;
-      console.log('toggle!')
+    },
+    showDropDown()
+    {
+      this.showDropdown = !this.showDropdown;
     },
 },
 })
@@ -135,7 +136,6 @@ export default defineComponent({
 .slide-leave-from {
   transform: translateX(0);
 }
-
 </style>
 
 
