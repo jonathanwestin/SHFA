@@ -1,15 +1,23 @@
 <template>
 <div>
+    <!-- API Data 
+    <ul>
+      <li v-for="result in results" :key="result.ksamsok_id">
+        {{ result.coordinates.coordinates }}
+      </li>
+    </ul> -->
+
+  
   <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
   <h1 class="text-3xl m-8">SHFA</h1>
  <div class="w-1/2 m-8 mb-32 flex">
   <div class="relative w-full">
     <input type="text" id="search" name="search" placeholder="Search Image Database" class="border border-gray-400 py-3 pl-6 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black drop-shadow-lg">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute cursor-pointer top-4 right-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24" @click="showDropDown" stroke="currentColor">
+    <svg xmlns="http://www.w3.org/2000/svg" class="dropdown-svg h-5 w-5 absolute cursor-pointer top-4 right-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24" @click="showDropDown" stroke="currentColor">
       <path fill-rule="evenodd" d="M13.853 12.146a1 1 0 0 1-1.414 1.414l-1.147-1.147a4.5 4.5 0 1 1 1.414-1.414l1.147 1.147zm3.708 3.708a1 1 0 0 1-1.414 1.414l-3.8-3.8a6 6 0 1 1 1.414-1.414l3.8 3.8zM6.5 10a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" clip-rule="evenodd"></path>
     </svg>
   </div>
-  <div id="dropdown" class="absolute z-10 top-12 right-[275px] py-2 w-1/4 bg-white rounded-md shadow-xl" v-if="showDropdown">
+  <div id="dropdown" class="absolute z-10 top-12 right-[200px] py-2 w-[400px] bg-white rounded-md shadow-xl" v-if="showDropdown">
     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 1</a>
     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 2</a>
     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 3</a>
@@ -49,12 +57,7 @@
       </template>
     </MasonryWall>
   </div>
- <!--  <ul> Fetch for API
-    <li v-for="restaurant in restaurants.data" :key="restaurant.id">
-      <h2>{{ restaurant.attributes.name}}</h2>
-      <p>{{ restaurant.attributes.description }}</p>
-    </li>
-  </ul> -->
+
 </div>
 </div>
 <!-- Panel 3 -->
@@ -88,7 +91,7 @@ export default defineComponent({
   data() {
     return {
       items: [50, 75, 75, 100, 50, 50, 75, 150, 125, 175, 50, 100, 125, 50, 75, 75, 100, 50, 50, 75, 150, 125, 175, 50, 100, 125],
-      restaurants: [],
+      results: [],
       showDropdown: false,
       showThreePanels: false,
     }
@@ -99,12 +102,13 @@ export default defineComponent({
     dragInterval: 1,
     gutterSize: 10,
     gutterAlign: 'start',
-  })
-    fetch("http://localhost:1337/api/restaurants")
+  }),
+   /*  fetch('http://diana.dh.gu.se/api/shfa/site/')
       .then(response => response.json())
       .then(data => {
-        this.restaurants = data;
-      });
+        // Set the results data to the retrieved JSON data
+        this.results = data.results;
+      }); */
     document.addEventListener('click', this.closeDropdown);
   },
   methods: {
@@ -136,6 +140,17 @@ export default defineComponent({
 .slide-leave-from {
   transform: translateX(0);
 }
+
+  .dropdown-svg {
+    transition: transform 0.2s;
+    width: 24px;
+    height: 24px;
+  }
+
+  .dropdown-svg:hover,
+  .dropdown-svg:focus {
+    transform: scale(1.1);
+  }
 </style>
 
 
