@@ -1,11 +1,11 @@
 <template>
 <div>
     <!-- API Data  -->
-    <ul>
+ <!--    <ul>
       <li v-for="result in results" :key="result.ksamsok_id">
         {{ result.coordinates.coordinates }}
       </li>
-    </ul> 
+    </ul>  -->
 
   
   <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
@@ -35,7 +35,7 @@
   <!-- Panel 1 -->
   <div  id="split-0" class="flex-grow bg-gray-200 transition-all duration-500"
        :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }">
-      <Map />
+      <Map :coordinates="coordinates"/>
   </div>
   <!-- Panel 2 -->
   <div id="split-1" class="flex-grow bg-gray-400 transition-all duration-500 overflow-auto" 
@@ -103,12 +103,13 @@ export default defineComponent({
     gutterSize: 10,
     gutterAlign: 'start',
   }),
-    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=25')
+   /*    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=25')
       .then(response => response.json())
       .then(data => {
         // Set the results data to the retrieved JSON data
         this.results = data.results;
-      }); 
+      });  */
+
     document.addEventListener('click', this.closeDropdown);
   },
   methods: {
@@ -120,7 +121,20 @@ export default defineComponent({
     {
       this.showDropdown = !this.showDropdown;
     },
-},
+  },
+  created() {
+    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=25')
+      .then(response => response.json())
+      .then(data => {
+        // Set the results data to the retrieved JSON data
+        this.results = data.results;
+      });
+  },
+  computed: {
+    coordinates() { //used to pass coordinates to the child component
+      return this.results.map(result => result.coordinates.coordinates)
+    }
+  }
 })
 </script>
 

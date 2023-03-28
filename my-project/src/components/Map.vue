@@ -1,6 +1,11 @@
 <template>
-    <div id="map"></div>
+  <div id="map">
+    <!-- <li v-for="coordinate in coordinates" :key="coordinate">
+      {{ coordinate }}
+    </li> -->
+  </div>
 </template>
+
 <script>
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -15,55 +20,61 @@ import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
 
 export default {
-    name: 'MapComponent',
-    mounted() {
-        const map = new Map({
-            target: 'map',
-            layers: [
-                new TileLayer({
-                    source: new OSM()
-                })
-            ],
-            view: new View({
-                center: fromLonLat([11.9746, 57.7089]),
-                zoom: 12
-            })
-        });
-
-        const coordinates = [
-            [11.9746, 57.7089],
-            [11.9709, 57.7066],
-            [11.9815, 57.6995]
-        ];
-
-        const iconStyle = new Style({
-            image: new Icon({
-                src: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Map_marker_font_awesome.svg',
-                scale: 5,
-                anchor: [0.5, 1],
-                anchorXUnits: 'fraction',
-                anchorYUnits: 'fraction'
-            })
-        });
-
-        const vectorSource = new VectorSource({
-            features: coordinates.map(coord => new Feature({
-                geometry: new Point(fromLonLat(coord))
-            }))
-        });
-
-        const vectorLayer = new VectorLayer({
-            source: vectorSource,
-            style: iconStyle
-        });
-
-        map.addLayer(vectorLayer);
+  name: 'MapComponent',
+  props: {
+    coordinates: {
+      type: Array,
+      required: true
     }
+  },
+  mounted() {
+    this.initMap();
+  },
+  methods: {
+    initMap() {
+      const map = new Map({
+        target: 'map',
+        layers: [
+          new TileLayer({
+            source: new OSM()
+          })
+        ],
+        view: new View({
+          center: fromLonLat([11.9746, 57.7089]),
+          zoom: 12
+        })
+      });
+
+      const iconStyle = new Style({
+        image: new Icon({
+          src: 'https://cdn3.iconfinder.com/data/icons/faticons/32/location-01-512.png',
+          scale: 0.05,
+          anchor: [0.5, 1],
+          anchorXUnits: 'fraction',
+          anchorYUnits: 'fraction'
+        })
+      });
+
+      //creates the new layer for the pins
+      const vectorSource = new VectorSource({
+        features: this.coordinates.map(coord => new Feature({
+          geometry: new Point(fromLonLat([coord[0], coord[1]])) 
+        }))
+      });
+
+      const vectorLayer = new VectorLayer({
+        source: vectorSource
+      });
+
+      map.addLayer(vectorLayer);
+    }
+  }
 }
 </script>
+
 <style>
 #map {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 </style>
