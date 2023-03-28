@@ -1,11 +1,11 @@
 <template>
 <div>
-    <!-- API Data 
+    <!-- API Data  -->
     <ul>
       <li v-for="result in results" :key="result.ksamsok_id">
         {{ result.coordinates.coordinates }}
       </li>
-    </ul> -->
+    </ul> 
 
   
   <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
@@ -103,12 +103,12 @@ export default defineComponent({
     gutterSize: 10,
     gutterAlign: 'start',
   }),
-   /*  fetch('http://diana.dh.gu.se/api/shfa/site/')
+    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=25')
       .then(response => response.json())
       .then(data => {
         // Set the results data to the retrieved JSON data
         this.results = data.results;
-      }); */
+      }); 
     document.addEventListener('click', this.closeDropdown);
   },
   methods: {
@@ -141,16 +141,16 @@ export default defineComponent({
   transform: translateX(0);
 }
 
-  .dropdown-svg {
-    transition: transform 0.2s;
-    width: 24px;
-    height: 24px;
-  }
+.dropdown-svg {
+  transition: transform 0.2s;
+  width: 24px;
+  height: 24px;
+}
 
-  .dropdown-svg:hover,
-  .dropdown-svg:focus {
-    transform: scale(1.1);
-  }
+.dropdown-svg:hover,
+.dropdown-svg:focus {
+  transform: scale(1.1);
+}
 </style>
 
 
