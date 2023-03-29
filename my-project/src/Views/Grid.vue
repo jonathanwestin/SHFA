@@ -33,29 +33,21 @@
   <div class="split-container">
   <div class="flex h-screen w-screen">
   <!-- Panel 1 -->
-  <div  id="split-0" class="flex-grow bg-gray-200 transition-all duration-500"
+  <div  id="split-0" class="flex-grow bg-gray-200 "
        :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }">
-      <Map :coordinates="coordinates"/>
+      <!-- <Map :coordinates="coordinates"/> -->
+      <Map :coordinates="results"/>
   </div>
   <!-- Panel 2 -->
-  <div id="split-1" class="flex-grow bg-gray-400 transition-all duration-500 overflow-auto" 
+  <div id="split-1" class="flex-grow bg-gray-400 overflow-auto" 
        :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }"
        @click="toggleThreePanels">
  <!--  <div class="relative">
   <button class="absolute top-0 right-0 m-2 p-2 bg-blue-500 text-white rounded-lg">
   </button> -->
-  <div class="max-w-lg mt-10 mx-6 lg:mx-auto">
+  <div class="mt-10 mx-6 lg:mx-auto">
   <div class="p-6">
-    <MasonryWall :items="items" :ssr-columns="1" :column-width="100" :gap="16">
-      <template #default="{ item, index }">
-        <div
-          :style="{ height: `${item}px` }"
-          class="card flex items-center justify-center bg-slate-50 text-black rounded-md"
-        >
-          {{ index }}
-        </div>
-      </template>
-    </MasonryWall>
+   <MasonryGrid/>
   </div>
 
 </div>
@@ -79,14 +71,14 @@
 </template>
 
 <script lang="ts">
-import MasonryWall from '@yeger/vue-masonry-wall'
 import Map from '../components/Map.vue'
 import { defineComponent } from 'vue'
 import Split from 'split.js';
+import MasonryGrid from '../components/MasonryGrid.vue'
 
 export default defineComponent({
   components: {
-    MasonryWall, Map
+    Map, MasonryGrid
   },
   data() {
     return {
@@ -123,18 +115,18 @@ export default defineComponent({
     },
   },
   created() {
-    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=25')
+    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=2500')
       .then(response => response.json())
       .then(data => {
         // Set the results data to the retrieved JSON data
         this.results = data.results;
       });
   },
-  computed: {
+  /* computed: {
     coordinates() { //used to pass coordinates to the child component
       return this.results.map(result => result.coordinates.coordinates)
     }
-  }
+  } */
 })
 </script>
 

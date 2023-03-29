@@ -24,15 +24,38 @@ export default {
   props: {
     coordinates: {
       type: Array,
-      required: true
+      default: () => [],
+    }
+  },
+  data()
+  {
+    return {
+    map: null,
+    vectorLayer: null,
+    iconStyle: null,
+    mappedCoordinates: [],
     }
   },
   mounted() {
     this.initMap();
   },
+  watch: {
+    coordinates: {
+      deep: true,
+      handler() {
+        this.coordinatesMapped = this.coordinates.map(result => result.coordinates.coordinates);
+      },
+    },
+    coordinatesMapped: {
+      deep: true,
+      handler() {
+        this.updateCoordinates();
+      },
+    },
+  },
   methods: {
     initMap() {
-      const map = new Map({
+      this.map = new Map({
         target: 'map',
         layers: [
           new TileLayer({
@@ -45,7 +68,7 @@ export default {
         })
       });
 
-      const iconStyle = new Style({
+      this.iconStyle = new Style({
         image: new Icon({
           src: 'https://cdn3.iconfinder.com/data/icons/faticons/32/location-01-512.png',
           scale: 0.05,
@@ -62,12 +85,36 @@ export default {
         }))
       });
 
-      const vectorLayer = new VectorLayer({
+      this.vectorLayer = new VectorLayer({
         source: vectorSource
       });
 
-      map.addLayer(vectorLayer);
-    }
+      this.map.addLayer(this.vectorLayer);
+    },
+    updateCoordinates() {
+      // creates the new layer for the pins
+      const vectorSource = new VectorSource({
+        features: this.mappedCoordinates.map(coord => new Feature({
+          geometry: new Point(fromLonLat([coord[0], coord[1]])) 
+        }))
+      });
+
+      this.vectorLayer = new VectorLayer({
+        source: vectorSource
+      });
+
+      this.map.addLayer(this.vectorLayer);
+    },
+  },
+  computed: {
+    coordinatesMapped: {
+      get() {
+        return this.coordinates.map(result => result.coordinates.coordinates);
+      },
+      set(value) {
+        this.mappedCoordinates = value;
+      },
+    },
   }
 }
 </script>
