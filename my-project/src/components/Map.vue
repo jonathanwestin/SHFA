@@ -18,6 +18,7 @@ import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import Icon from 'ol/style/Icon';
 import Style from 'ol/style/Style';
+import {toLonLat} from 'ol/proj';
 
 export default {
   name: 'MapComponent',
@@ -54,19 +55,19 @@ export default {
     },
   },
   methods: {
-    initMap() {
-      this.map = new Map({
-        target: 'map',
-        layers: [
-          new TileLayer({
-            source: new OSM()
-          })
-        ],
-        view: new View({
-          center: fromLonLat([11.9746, 57.7089]),
-          zoom: 12
-        })
-      });
+   initMap() {
+  this.map = new Map({
+    target: 'map',
+    layers: [
+      new TileLayer({
+        source: new OSM()
+      })
+    ],
+    view: new View({
+      center: fromLonLat([11.9746, 57.7089]),
+      zoom: 12
+    })
+  });
 
       this.iconStyle = new Style({
         image: new Icon({
@@ -89,8 +90,20 @@ export default {
         source: vectorSource
       });
 
-      this.map.addLayer(this.vectorLayer);
-    },
+     this.map.addLayer(this.vectorLayer);
+
+    // Add 'click' event listener
+    this.map.on('click', (event) => {
+      this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
+        const coordinates = feature.getGeometry().getCoordinates();
+        const [latitude, longitude] = toLonLat(coordinates).reverse();
+        console.log('Clicked coordinates:', { latitude, longitude });
+
+        // Return true to break out of the loop after the first feature is found
+        return true;
+      });
+    });
+},
     updateCoordinates() {
       // creates the new layer for the pins
       const vectorSource = new VectorSource({
