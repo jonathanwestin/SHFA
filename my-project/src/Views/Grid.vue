@@ -10,7 +10,7 @@
   
   <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
   <h1 class="text-3xl m-8">SHFA</h1>
- <div class="w-1/2 m-8 mb-32 flex">
+<!--  <div class="w-1/2 m-8 mb-32 flex">
   <div class="relative w-full">
     <input type="text" id="search" name="search" placeholder="Search Image Database" class="border border-gray-400 py-3 pl-6 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black drop-shadow-lg">
     <svg xmlns="http://www.w3.org/2000/svg" class="dropdown-svg h-5 w-5 absolute cursor-pointer top-4 right-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24" @click="showDropDown" stroke="currentColor">
@@ -27,14 +27,15 @@
     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 7</a>
     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-500 hover:text-white">Option 8</a>
   </div>
-</div>
+</div> -->
 
   <!-- Start of Container -->
   <div class="split-container">
   <div class="flex h-screen w-screen">
   <!-- Panel 1 -->
-  <div  id="split-0" class="flex-grow bg-gray-200 "
+  <div  id="split-0" class="flex-grow bg-gray-200 flex flex-col justify-between px-10 py-5"
        :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }">
+      <input type="text" id="search" name="search" placeholder="Search Image Database..." class="border border-gray-400 py-3 pl-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black drop-shadow-lg mb-20">
       <Map :coordinates="results" @raa-id-selected="selectedRaaId = $event"></Map>
   </div>
   <!-- Panel 2 -->
@@ -90,7 +91,7 @@ export default defineComponent({
   },
   mounted() {
     Split(['#split-0', '#split-1', '#split-2'], {
-    minSize: 50,
+    minSize: [500, 300],
     dragInterval: 1,
     gutterSize: 10,
     gutterAlign: 'start',

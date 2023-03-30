@@ -38,3 +38,9 @@ body
   background-position: 50%;
 }
 
+/*Border Radius for Map*/
+#map > div > div.ol-unselectable.ol-layers > div > canvas
+{
+  border-radius: 20px;
+}
+

@@ -106,7 +106,6 @@ this.map.on('click', (event) => {
   });
 });
 
-
 },
   updateCoordinates() {
   // creates the new layer for the pins
@@ -143,7 +142,7 @@ this.map.on('click', (event) => {
 }
 </script>
 
-<style>
+<style scoped>
 #map {
   width: 100%;
   height: 100%;
