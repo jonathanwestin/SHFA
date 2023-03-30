@@ -94,7 +94,7 @@ export default {
      this.map.addLayer(this.vectorLayer);
 
     // Add 'click' event listener
-    this.map.on('click', (event) => {
+this.map.on('click', (event) => {
   this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
     const coordinates = feature.getGeometry().getCoordinates();
     const lonLat = toLonLat(coordinates);
@@ -102,8 +102,10 @@ export default {
     console.log('Clicked coordinates:', lonLat.reverse());
     console.log('Clicked raa_id:', raa_id);
     this.clickedRaaId = raa_id;
+    this.$emit('raa-id-selected', raa_id);
   });
 });
+
 
 },
   updateCoordinates() {
@@ -115,6 +117,7 @@ export default {
         geometry: new Point(fromLonLat([coord[0], coord[1]]))
       });
       feature.set('raa_id', result.raa_id); // Add raa_id as a property of the feature
+      feature.setStyle(this.iconStyle); // Apply the iconStyle to the feature
       return feature;
     })
   });
@@ -125,6 +128,7 @@ export default {
 
   this.map.addLayer(this.vectorLayer);
 }
+
   },
   computed: {
     coordinatesMapped: {

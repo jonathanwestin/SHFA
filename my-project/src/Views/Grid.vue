@@ -35,8 +35,7 @@
   <!-- Panel 1 -->
   <div  id="split-0" class="flex-grow bg-gray-200 "
        :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }">
-      <!-- <Map :coordinates="coordinates"/> -->
-      <Map :coordinates="results"/>
+      <Map :coordinates="results" @raa-id-selected="selectedRaaId = $event"></Map>
   </div>
   <!-- Panel 2 -->
   <div id="split-1" class="flex-grow bg-gray-400 overflow-auto" 
@@ -47,7 +46,7 @@
   </button> -->
   <div class="mt-10 mx-6 lg:mx-auto">
   <div class="p-6">
-   <MasonryGrid/>
+    <MasonryGrid :raa-id="selectedRaaId"></MasonryGrid>
   </div>
 
 </div>
@@ -86,6 +85,7 @@ export default defineComponent({
       results: [],
       showDropdown: false,
       showThreePanels: false,
+      selectedRaaId: null,
     }
   },
   mounted() {

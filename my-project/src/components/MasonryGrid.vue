@@ -4,7 +4,9 @@
       <div class="card flex items-center justify-center bg-slate-50 text-black rounded-md">
         <img :src="item.file" :alt="`Image ${index}`" />
       </div>
+      {{raaId}}
     </template>
+   
   </MasonryWall>
 </template>
 
@@ -16,21 +18,40 @@ export default {
   components: {
     MasonryWall,
   },
+  props: {
+    raaId: {
+      type: String,
+      default: null,
+    },
+  },
   data() {
     return {
-      items: [2,2,2,2,2,2,2,2,2,2,2,2,2],
+      items: [],
     }
   },
   mounted() {
-    fetch('https://diana.dh.gu.se/api/shfa/image/?format=json&limit=25')
-      .then(response => response.json())
-      .then(data => {
-        // Set the results data to the retrieved JSON data
-        this.items = data.results;
-      });
-
+  },
+  methods: {
+  fetchData() {
+    if (this.raaId) {
+      fetch(`https://diana.dh.gu.se/api/shfa/image/?format=json&raa_id=${this.raaId}`)
+        .then(response => response.json())
+        .then(data => {
+          // Filter the results data to only include images with the matching raa_id
+          this.items = data.results.filter(image => image.raa_id === this.raaId);
+        });
+    }
+  },
+  },
+  watch: {
+      raaId: {
+        handler() {
+          this.fetchData();
+        },
+        immediate: true,
+      },
+    },
   }
-}
 </script>
 
 <style>
