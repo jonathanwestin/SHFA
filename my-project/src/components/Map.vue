@@ -35,6 +35,7 @@ export default {
     vectorLayer: null,
     iconStyle: null,
     mappedCoordinates: [],
+    clickedRaaId: null,
     }
   },
   mounted() {
@@ -94,30 +95,36 @@ export default {
 
     // Add 'click' event listener
     this.map.on('click', (event) => {
-      this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
-        const coordinates = feature.getGeometry().getCoordinates();
-        const [latitude, longitude] = toLonLat(coordinates).reverse();
-        console.log('Clicked coordinates:', { latitude, longitude });
+  this.map.forEachFeatureAtPixel(event.pixel, (feature) => {
+    const coordinates = feature.getGeometry().getCoordinates();
+    const lonLat = toLonLat(coordinates);
+    const raa_id = feature.get('raa_id');
+    console.log('Clicked coordinates:', lonLat.reverse());
+    console.log('Clicked raa_id:', raa_id);
+    this.clickedRaaId = raa_id;
+  });
+});
 
-        // Return true to break out of the loop after the first feature is found
-        return true;
-      });
-    });
 },
-    updateCoordinates() {
-      // creates the new layer for the pins
-      const vectorSource = new VectorSource({
-        features: this.mappedCoordinates.map(coord => new Feature({
-          geometry: new Point(fromLonLat([coord[0], coord[1]])) 
-        }))
+  updateCoordinates() {
+  // creates the new layer for the pins
+  const vectorSource = new VectorSource({
+    features: this.coordinates.map(result => {
+      const coord = result.coordinates.coordinates;
+      const feature = new Feature({
+        geometry: new Point(fromLonLat([coord[0], coord[1]]))
       });
+      feature.set('raa_id', result.raa_id); // Add raa_id as a property of the feature
+      return feature;
+    })
+  });
 
-      this.vectorLayer = new VectorLayer({
-        source: vectorSource
-      });
+  this.vectorLayer = new VectorLayer({
+    source: vectorSource
+  });
 
-      this.map.addLayer(this.vectorLayer);
-    },
+  this.map.addLayer(this.vectorLayer);
+}
   },
   computed: {
     coordinatesMapped: {
