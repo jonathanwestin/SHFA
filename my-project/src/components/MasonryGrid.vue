@@ -1,13 +1,12 @@
 <template>
-  <MasonryWall :items="items" :ssr-columns="1" :column-width="100" :gap="16">
-    <template #default="{ item, index }">
-      <div class="card flex items-center justify-center bg-slate-50 text-black rounded-md">
-        <img :src="item.file" :alt="`Image ${index}`" />
-      </div>
-      {{raaId}}
-    </template>
-   
-  </MasonryWall>
+<MasonryWall :items="items" :ssr-columns="1" :column-width="100" :gap="16" :key="raaId">
+  <template #default="{ item, index }">
+    <div class="card flex items-center justify-center bg-slate-50 text-black rounded-md">
+      <img :src="item" :alt="`Image ${index}`" />
+    </div>
+    {{raaId}}
+  </template>
+</MasonryWall>
 </template>
 
 
@@ -20,7 +19,8 @@ export default {
   },
   props: {
     raaId: {
-      type: String,
+      type: String, // Change this to String since the raaId is a string
+      required: false,
       default: null,
     },
   },
@@ -32,26 +32,26 @@ export default {
   mounted() {
   },
   methods: {
-  fetchData() {
+    fetchData() {
     if (this.raaId) {
       fetch(`https://diana.dh.gu.se/api/shfa/image/?format=json&raa_id=${this.raaId}`)
         .then(response => response.json())
         .then(data => {
-          // Filter the results data to only include images with the matching raa_id
-          this.items = data.results.filter(image => image.raa_id === this.raaId);
+          // Update the items array with the image URLs
+          this.items = data.results.map(image => image.file);
+        })
+        .catch(error => {
+          console.error('Error fetching images:', error);
         });
     }
   },
+},
+watch: {
+  raaId() {
+    this.fetchData();
   },
-  watch: {
-      raaId: {
-        handler() {
-          this.fetchData();
-        },
-        immediate: true,
-      },
-    },
-  }
+},
+}
 </script>
 
 <style>

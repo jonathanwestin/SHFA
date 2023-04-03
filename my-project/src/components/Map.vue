@@ -40,6 +40,7 @@ export default {
   },
   mounted() {
     this.initMap();
+    this.filterAndDisplayCoordinates();
   },
   watch: {
     coordinates: {
@@ -56,8 +57,24 @@ export default {
     },
   },
   methods: {
+    filterAndDisplayCoordinates() {
+      const extent = this.map.getView().calculateExtent(this.map.getSize());
+      const filteredCoordinates = this.coordinatesMapped.filter(coord => {
+        if (coord) {
+          const point = new Point(fromLonLat([coord[0], coord[1]]));
+          return point.intersectsExtent(extent);
+        }
+        return false;
+      });
+      this.coordinatesMapped = filteredCoordinates.map(result => {
+        if (result && result.coordinates) {
+          return result.coordinates.coordinates;
+        }
+      }).filter(Boolean);
+    },
+
    initMap() {
-  this.map = new Map({
+    this.map = new Map({
     target: 'map',
     layers: [
       new TileLayer({
@@ -105,6 +122,8 @@ this.map.on('click', (event) => {
     this.$emit('raa-id-selected', raa_id);
   });
 });
+
+this.map.on('moveend', this.filterAndDisplayCoordinates);
 
 },
   updateCoordinates() {

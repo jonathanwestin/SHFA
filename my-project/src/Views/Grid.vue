@@ -82,7 +82,7 @@ export default defineComponent({
   },
   data() {
     return {
-      items: [50, 75, 75, 100, 50, 50, 75, 150, 125, 175, 50, 100, 125, 50, 75, 75, 100, 50, 50, 75, 150, 125, 175, 50, 100, 125],
+      items: [],
       results: [],
       showDropdown: false,
       showThreePanels: false,
@@ -116,18 +116,30 @@ export default defineComponent({
     },
   },
   created() {
-    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=2500')
-      .then(response => response.json())
-      .then(data => {
-        // Set the results data to the retrieved JSON data
-        this.results = data.results;
-      });
-  },
-  /* computed: {
-    coordinates() { //used to pass coordinates to the child component
-      return this.results.map(result => result.coordinates.coordinates)
+      async function fetchAllData(url, limit = 500, offset = 0, results = []) {
+      const response = await fetch(`${url}?format=json&limit=${limit}&offset=${offset}`);
+      const data = await response.json();
+
+      const updatedResults = results.concat(data.results);
+
+      if (data.next) {
+        return fetchAllData(url, limit, offset + limit, updatedResults);
+      } else {
+        return updatedResults;
+      }
     }
-  } */
+
+    // Usage
+      fetchAllData('https://diana.dh.gu.se/api/shfa/site/')
+      .then(data => {
+        console.log('Fetched all data:', data);
+        this.results = data; // Set the results data property
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+
+      },
 })
 </script>
 
