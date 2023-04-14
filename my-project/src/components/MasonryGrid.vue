@@ -1,7 +1,7 @@
 <template>
-<MasonryWall :items="items" :ssr-columns="1" :column-width="220" :gap="4" :key="raaId">
+<MasonryWall :items="items" :ssr-columns="1" :column-width="200" :gap="2" :key="raaId">
   <template #default="{ item, index }">
-    <div class="card flex items-center justify-center bg-slate-50 text-black rounded-md">
+    <div class="grid-image card flex items-center justify-center bg-slate-50 text-black">
       <img :src="item" :alt="`Image ${index}`" />
     </div>
     <!-- {{raaId}} -->
@@ -54,7 +54,24 @@ watch: {
 }
 </script>
 
-<style>
+<style scoped>
+.card{
+border-radius:0px;
+  overflow:hidden;
+}
+
+.card img{
+  transition: all 0.2s ease-in-out;
+  transform:scale(1.02);
+
+}
+.card:hover img{
+  
+  filter:brightness(90%);
+  cursor:pointer;
+  transform:scale(1.05);
+}
+
 
 </style>
 

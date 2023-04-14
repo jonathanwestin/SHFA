@@ -33,7 +33,7 @@
   <div class="split-container main-color">
   <div class="flex" style="height:calc(100vh - 230px)">
   <!-- Panel 1 -->
-  <div  id="split-0" class="flex-grow flex flex-col justify-between main-color"
+  <div  id="split-0" class="flex-grow flex flex-col justify-between"
        :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }">
        
        <div id="search-interface" class="">
@@ -157,9 +157,9 @@ export default defineComponent({
 
 <style scoped>
 .title{
-  line-height:0.85;
+  line-height:0.80;
   font-size:52px;
-  font-weight:600;
+  font-weight:300;
   padding:25px 40px;
 }
 .top{
@@ -168,9 +168,14 @@ export default defineComponent({
 
 }
 
+.main-color{
+  background-color:rgb(65,65,65);
+
+}
+
 .split-container{
   overflow:hidden !important;
-  background-color:rgb(65,65,65);
+  
 
 }
 
@@ -178,10 +183,18 @@ export default defineComponent({
   height:calc(100% - 230px) ;
   width:100%;
   position:absolute;
-  box-shadow: inset 0rem 2rem 2rem rgba(0, 0, 0, 0.3)!important;
+  box-shadow: inset 0rem 2rem 2rem rgba(0, 0, 0, 0.4)!important;
   pointer-events:none;
 }
-.main-color{
+
+#split-0{
+padding:30px 15px 35px 40px;
+
+}
+
+
+#split-1{
+padding:0px 15px 0 15px;
 
 }
 
@@ -189,28 +202,30 @@ export default defineComponent({
 
 #search-interface{
   margin-bottom:10px;
-  padding:20px 10px 0px 40px;
+
  
 }
 #filter-interface{
   min-height:100px;
-  padding:10px 10px 20px 45px;
+  padding:10px 0px 0px 5px;
   color:white;
   z-index:1000;
 }
 
-#filter-interface .tag-example{
+.tag-example{
  display:inline;
- background-color: rgb(0,95,120);
+ background-color: rgb(90,90,90);
  padding: 5px 10px;
  border-radius:5px;
  margin-left:10px;
  cursor:pointer;
 }
 
-#filter-interface .tag-example:hover{
-  transform: scale(1.1);
-  background-color: rgb(0,75,100);
+.tag-example:hover{
+
+  background-color: rgb(170,70,70);
+
+ cursor:pointer;
 }
 
 
@@ -266,11 +281,8 @@ h2 input {
   z-index: 35;
 }
 
-#split-1{
-padding:0px 15px 0 15px;
 
 
-}
 
 h2 input:hover,
 h2 input:focus,

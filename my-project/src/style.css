@@ -44,7 +44,8 @@ div.split-container > div > div:nth-child(4)
 #map > div >  div.ol-unselectable.ol-layers > div > canvas
 {
   border-radius:20px;
-box-shadow: 0rem 2rem 2rem rgba(0, 0, 0, 0.8)!important;
+  z-index: 40; /* Fixes border-radius in Safari. */
+ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8)!important;
 
 }
 

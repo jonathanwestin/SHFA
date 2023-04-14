@@ -1,6 +1,5 @@
 <template>
 
-<div class="map-fade"></div>
  <div id="map">
     <!-- <li v-for="coordinate in coordinates" :key="coordinate">
       {{ coordinate }}
@@ -168,10 +167,13 @@ this.map.on('moveend', this.filterAndDisplayCoordinates);
 
 <style scoped>
 #map {
+  z-index: 40; /* Fixes border-radius in Safari. */
   width: 100%;
   height: 100%;
-  padding:0px 15px 40px 40px;
- 
+  padding:0px 0px 0px 0px;
+  border-radius:20px;
+ overflow:hidden!important;
+box-shadow: 0px 5px 45px rgba(0, 0, 0, 0.5)!important;
 }
 
 
