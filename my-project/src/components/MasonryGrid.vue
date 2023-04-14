@@ -1,10 +1,10 @@
 <template>
-<MasonryWall :items="items" :ssr-columns="1" :column-width="100" :gap="16" :key="raaId">
+<MasonryWall :items="items" :ssr-columns="1" :column-width="220" :gap="4" :key="raaId">
   <template #default="{ item, index }">
     <div class="card flex items-center justify-center bg-slate-50 text-black rounded-md">
       <img :src="item" :alt="`Image ${index}`" />
     </div>
-    {{raaId}}
+    <!-- {{raaId}} -->
   </template>
 </MasonryWall>
 </template>

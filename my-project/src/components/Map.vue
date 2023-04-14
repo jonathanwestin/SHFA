@@ -1,9 +1,14 @@
 <template>
-  <div id="map">
+
+<div class="map-fade"></div>
+ <div id="map">
     <!-- <li v-for="coordinate in coordinates" :key="coordinate">
       {{ coordinate }}
     </li> -->
+
   </div>
+
+
 </template>
 
 <script>
@@ -165,5 +170,9 @@ this.map.on('moveend', this.filterAndDisplayCoordinates);
 #map {
   width: 100%;
   height: 100%;
+  padding:0px 15px 40px 40px;
+ 
 }
+
+
 </style>

@@ -7,9 +7,9 @@
       </li>
     </ul>  -->
 
-  
-  <h1 class="text-5xl m-8">Swedish Rock Art Research Archive</h1>
-  <h1 class="text-3xl m-8">SHFA</h1>
+<div class="top">  
+  <h1 class="title">Swedish <br>Rock Art <br>Research<br> Archive</h1>
+</div>
 <!--  <div class="w-1/2 m-8 mb-32 flex">
   <div class="relative w-full">
     <input type="text" id="search" name="search" placeholder="Search Image Database" class="border border-gray-400 py-3 pl-6 pr-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black drop-shadow-lg">
@@ -30,23 +30,33 @@
 </div> -->
 
   <!-- Start of Container -->
-  <div class="split-container">
-  <div class="flex h-screen w-screen">
+  <div class="split-container main-color">
+  <div class="flex" style="height:calc(100vh - 230px)">
   <!-- Panel 1 -->
-  <div  id="split-0" class="flex-grow bg-gray-200 flex flex-col justify-between px-10 py-5"
+  <div  id="split-0" class="flex-grow flex flex-col justify-between main-color"
        :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }">
-      <input type="text" id="search" name="search" placeholder="Search Image Database..." class="border border-gray-400 py-3 pl-5 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-full text-black drop-shadow-lg mb-20">
+       
+       <div id="search-interface" class="">
+       <h2 class="input-unpad mb-0">
+      <input type="search" id="search" name="search" placeholder="Search Image Database..." class="">
+       </h2>
+      </div>
+      <div id="filter-interface"> 
+        Search suggestions: <div class="tag-example">Boat    </div><div class="tag-example">animal</div> <div class="tag-example">warrior</div> <div class="tag-example">weapon</div> <div class="tag-example">tanum</div>
+      </div>
+
       <Map :coordinates="results" @raa-id-selected="selectedRaaId = $event"></Map>
+  
   </div>
   <!-- Panel 2 -->
-  <div id="split-1" class="flex-grow bg-gray-400 overflow-auto" 
+  <div id="split-1" class="flex-grow overflow-auto main-color" 
        :class="{ 'w-1/3': showThreePanels, 'w-1/2': !showThreePanels }"
        @click="toggleThreePanels">
  <!--  <div class="relative">
   <button class="absolute top-0 right-0 m-2 p-2 bg-blue-500 text-white rounded-lg">
   </button> -->
-  <div class="mt-10 mx-6 lg:mx-auto">
-  <div class="p-6">
+  <div class="">
+  <div class="">
     <MasonryGrid :raa-id="selectedRaaId"></MasonryGrid>
   </div>
 
@@ -54,7 +64,7 @@
 </div>
 <!-- Panel 3 -->
 <transition name="slide">
-<div id="split-2" class="flex-grow bg-gray-600"
+<div id="split-2" class="flex-grow main-color"
       :class="{ 'w-1/3': showThreePanels, 'w-0': !showThreePanels }" v-show="showThreePanels">
     <button @click="toggleThreePanels" class="btn btn-circle m-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -62,7 +72,7 @@
 </div>
 </transition>
 
-
+<div class="split-container-top"></div>
 </div>
 </div>
 <!-- End of Container -->
@@ -90,10 +100,11 @@ export default defineComponent({
     }
   },
   mounted() {
+  
     Split(['#split-0', '#split-1', '#split-2'], {
     minSize: [500, 300],
     dragInterval: 1,
-    gutterSize: 10,
+    gutterSize: 5,
     gutterAlign: 'start',
   }),
    /*    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=25')
@@ -145,6 +156,129 @@ export default defineComponent({
 
 
 <style scoped>
+.title{
+  line-height:0.85;
+  font-size:52px;
+  font-weight:600;
+  padding:25px 40px;
+}
+.top{
+  height:230px;
+  z-index:1000;
+
+}
+
+.split-container{
+  overflow:hidden !important;
+  background-color:rgb(65,65,65);
+
+}
+
+.split-container-top{
+  height:calc(100% - 230px) ;
+  width:100%;
+  position:absolute;
+  box-shadow: inset 0rem 2rem 2rem rgba(0, 0, 0, 0.3)!important;
+  pointer-events:none;
+}
+.main-color{
+
+}
+
+
+
+#search-interface{
+  margin-bottom:10px;
+  padding:20px 10px 0px 40px;
+ 
+}
+#filter-interface{
+  min-height:100px;
+  padding:10px 10px 20px 40px;
+  color:white;
+  z-index:1000;
+}
+
+#filter-interface .tag-example{
+ display:inline;
+ background-color: rgb(0,95,120);
+ padding: 5px 10px;
+ border-radius:5px;
+ margin-left:10px;
+ cursor:pointer;
+}
+
+#filter-interface .tag-example:hover{
+  transform: scale(1.1);
+  background-color: rgb(0,75,100);
+}
+
+
+
+#search {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+  margin-right: 0px;
+  border-radius:8px;
+  margin-top:20px;
+  padding:10px 15px;
+  background-color:rgb(45,45,45);
+ 
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 0.5em;
+  width: 0.5em;
+  border-radius: 50em;
+  background: url(../../public/interface/input-cancel-x.svg) no-repeat 50% 50%;
+  background-size: contain;
+  opacity: 1.0;
+  pointer-events: none;
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+  opacity: 1.0;
+  pointer-events: all;
+  filter: invert(1);
+}
+
+h2 {
+  display: flex;
+  color: white;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 0.8;
+  
+}
+
+input:focus{
+    outline: none;
+}
+
+h2 input {
+  flex: 1;
+  min-width: 3em;
+  color: white;
+  font-weight: 400;
+  z-index: 35;
+}
+
+#split-1{
+padding:0px 15px 0 15px;
+
+
+}
+
+h2 input:hover,
+h2 input:focus,
+h2 input:not(:placeholder-shown) {
+  background-color: black;
+}
+
+
 .slide-enter-active,
 .slide-leave-active {
   transition: transform 200ms ease-in;
