@@ -194,7 +194,7 @@ export default defineComponent({
 }
 #filter-interface{
   min-height:100px;
-  padding:10px 10px 20px 40px;
+  padding:10px 10px 20px 45px;
   color:white;
   z-index:1000;
 }
