@@ -47,6 +47,11 @@
 
       <Map :coordinates="results" @raa-id-selected="selectedRaaId = $event"></Map>
   
+      <div style="display:flex;  align-items: center; justify-content: center;">
+      <div class="ui-map-info ui-overlay">
+        Filter the archive by adjusting the map view
+      </div>
+    </div>
   </div>
   <!-- Panel 2 -->
   <div id="split-1" class="flex-grow overflow-auto main-color" 
@@ -62,6 +67,7 @@
   <div class="">
   
     <MasonryGrid :raa-id="selectedRaaId"></MasonryGrid>
+
     <div style="display:flex;  align-items: center; justify-content: center;">
     <div class="ui-mode ui-overlay">
         <div class="item selected">Gallery</div>
@@ -380,6 +386,13 @@ color: rgb(150,200,255);
 padding: 2px 15px 6px 15px;
 text-align: center;
 bottom: 30px;
+margin-top: calc(100% - 100px);
+}
+
+.ui-map-info {
+padding: 2px 15px 6px 15px;
+text-align: center;
+bottom: 50px;
 margin-top: calc(100% - 100px);
 }
 
