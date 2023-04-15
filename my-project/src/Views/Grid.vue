@@ -55,13 +55,27 @@
  <!--  <div class="relative">
   <button class="absolute top-0 right-0 m-2 p-2 bg-blue-500 text-white rounded-lg">
   </button> -->
-  <div class="">
-  <div class="">
-    <MasonryGrid :raa-id="selectedRaaId"></MasonryGrid>
-  </div>
 
+   
+
+  <div class="">
+  <div class="">
+  
+    <MasonryGrid :raa-id="selectedRaaId"></MasonryGrid>
+    <div style="display:flex;  align-items: center; justify-content: center;">
+    <div class="ui-mode">
+        <div class="item selected">Gallery</div>
+        <div class="item">Data</div>
+      </div>
+      <div class="ui-numbers">
+        xxx objects
+      </div>
+    </div>
+  </div>
+ 
 </div>
 </div>
+
 <!-- Panel 3 -->
 <transition name="slide">
 <div id="split-2" class="flex-grow main-color"
@@ -333,6 +347,47 @@ h2 input:not(:placeholder-shown) {
 .dropdown-svg:focus {
   transform: scale(1.1);
 }
+
+.ui-mode {
+  display: block;
+  z-index: 1000;
+  position: fixed;
+  top: 260px;
+  font-size: 18px;
+  color: white;
+  border-radius: 10px;
+  padding: 4px 10px 4px 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+
+}
+
+.ui-mode .item {
+  cursor: pointer;
+  display: inline;
+  font-weight: 400;
+  padding: 5px 15px 5px 15px;
+}
+
+.ui-numbers {
+  z-index: 100;
+  width: 120px;
+  position: absolute;
+  border-radius: 10px;
+  padding: 2px 10px 6px 10px;
+  text-align: center;
+  color: white;
+  bottom: 30px;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  margin-top: calc(100% - 100px);
+  font-weight: 400;
+}
+
+
+
+
 </style>
 
 
