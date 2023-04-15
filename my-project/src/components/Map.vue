@@ -91,6 +91,7 @@ export default {
     })
   });
 
+
       this.iconStyle = new Style({
         image: new Icon({
           src: 'https://cdn3.iconfinder.com/data/icons/faticons/32/location-01-512.png',
@@ -174,6 +175,9 @@ this.map.on('moveend', this.filterAndDisplayCoordinates);
   border-radius:10px;
  overflow:hidden!important;
 box-shadow: 0px 5px 45px rgba(0, 0, 0, 0.5)!important;
+filter:contrast(130%) grayscale(80%) brightness(0.9);
+filter:
+
 }
 
 
