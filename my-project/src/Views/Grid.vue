@@ -49,7 +49,7 @@
   
       <div style="display:flex;  align-items: center; justify-content: center;">
       <div class="ui-map-info ui-overlay">
-        Filter the archive by adjusting the map view
+        Filter the archive by adjusting the view or select a site
       </div>
     </div>
   </div>
@@ -124,7 +124,7 @@ export default defineComponent({
     Split(['#split-0', '#split-1', '#split-2'], {
     minSize: [500, 300],
     dragInterval: 1,
-    gutterSize: 5,
+    gutterSize: 10,
     gutterAlign: 'start',
   }),
    /*    fetch('https://diana.dh.gu.se/api/shfa/site/?format=json&limit=25')

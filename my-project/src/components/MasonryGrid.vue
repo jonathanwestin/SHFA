@@ -1,5 +1,5 @@
 <template>
-<MasonryWall :items="items" :ssr-columns="1" :column-width="200" :gap="2" :key="raaId">
+<MasonryWall :items="items" :ssr-columns="1" :column-width="210" :gap="2" :key="raaId">
   <template #default="{ item, index }">
     <div class="grid-image card flex items-center justify-center bg-slate-50 text-black">
      
