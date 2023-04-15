@@ -8,7 +8,7 @@
     </ul>  -->
 
 <div class="top">  
-  <h1 class="title">Swedish <br>Rock Art <br>Research<br> Archive</h1>
+  <h1 class="title">Swedish <br><div class="emph">Rock Art </div><br>Research<br> Archive</h1>
 </div>
 <!--  <div class="w-1/2 m-8 mb-32 flex">
   <div class="relative w-full">
@@ -38,11 +38,11 @@
        
        <div id="search-interface" class="">
        <h2 class="input-unpad mb-0">
-      <input type="search" id="search" name="search" placeholder="Search Image Database..." class="">
+      <input type="search" id="search" name="search" placeholder="Search Archive..." class="">
        </h2>
       </div>
       <div id="filter-interface"> 
-        Search suggestions: <div class="tag-example">Boat    </div><div class="tag-example">animal</div> <div class="tag-example">warrior</div> <div class="tag-example">weapon</div> <div class="tag-example">tanum</div>
+        Filter suggestions: <div class="tag-example">Boat    </div><div class="tag-example">animal</div> <div class="tag-example">warrior</div> <div class="tag-example">weapon</div> <div class="tag-example">tanum</div>
       </div>
 
       <Map :coordinates="results" @raa-id-selected="selectedRaaId = $event"></Map>
@@ -159,9 +159,15 @@ export default defineComponent({
 .title{
   line-height:0.80;
   font-size:52px;
-  font-weight:300;
+  font-weight:600;
   padding:25px 40px;
 }
+
+.title .emph{
+  display:inline;
+  color:rgb(180, 0, 0);
+}
+
 .top{
   height:230px;
   z-index:1000;
@@ -207,7 +213,7 @@ padding:0px 15px 0 15px;
 }
 #filter-interface{
   min-height:100px;
-  padding:10px 0px 0px 5px;
+  padding:10px 0px 0px 8px;
   color:white;
   z-index:1000;
 }
