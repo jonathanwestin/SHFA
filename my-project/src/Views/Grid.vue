@@ -268,7 +268,7 @@ float:left;
   margin-left: 0px;
   margin-right: 0px;
   border-radius:8px;
-  margin-top:20px;
+  margin-top:10px;
   padding:10px 15px;
   background-color:rgb(45,45,45);
  
