@@ -102,8 +102,8 @@ border-radius:0px;
 
 .grid-item-info-meta h1 {
   font-size: 20px;
-  margin-left: 30px;
-  bottom: 30px;
+  margin-left: 20px;
+  bottom: 20px;
   font-weight: 800;
 }
 

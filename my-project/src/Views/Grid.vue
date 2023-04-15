@@ -42,7 +42,7 @@
        </h2>
       </div>
       <div id="filter-interface"> 
-        Filter suggestions: <div class="tag-example">Boat    </div><div class="tag-example">animal</div> <div class="tag-example">warrior</div> <div class="tag-example">weapon</div> <div class="tag-example">tanum</div>
+        <div class="filter-text"> Filter suggestions: </div><div class="tag-example">Boat    </div><div class="tag-example">animal</div> <div class="tag-example">warrior</div> <div class="tag-example">weapon</div>
       </div>
 
       <Map :coordinates="results" @raa-id-selected="selectedRaaId = $event"></Map>
@@ -213,17 +213,28 @@ padding:0px 15px 0 15px;
 }
 #filter-interface{
   min-height:100px;
-  padding:10px 0px 0px 8px;
+  padding:10px 0px 0px 0px;
   color:white;
   z-index:1000;
+  margin-left:-5px;
+}
+
+.filter-text{
+float:left;
+ padding: 5px 10px;
+ border-radius:5px;
+ margin-left:3px;
+ margin-bottom:5px;
 }
 
 .tag-example{
- display:inline;
+float:left;
  background-color: rgb(90,90,90);
  padding: 5px 10px;
  border-radius:5px;
  margin-left:10px;
+ margin-bottom:5px;
+
  cursor:pointer;
 }
 
