@@ -42,7 +42,7 @@
        </h2>
       </div>
       <div id="filter-interface"> 
-        <div class="filter-text"> Filter suggestions: </div><div class="tag-example">Boat    </div><div class="tag-example">animal</div> <div class="tag-example">warrior</div> <div class="tag-example">weapon</div>
+        <div class="filter-text"> Filter suggestions: </div><div class="tag-example">boat</div><div class="tag-example">animal</div> <div class="tag-example">warrior</div> <div class="tag-example">weapon</div>
       </div>
 
       <Map :coordinates="results" @raa-id-selected="selectedRaaId = $event"></Map>
