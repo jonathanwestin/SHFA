@@ -63,11 +63,11 @@
   
     <MasonryGrid :raa-id="selectedRaaId"></MasonryGrid>
     <div style="display:flex;  align-items: center; justify-content: center;">
-    <div class="ui-mode">
+    <div class="ui-mode ui-overlay">
         <div class="item selected">Gallery</div>
         <div class="item">Data</div>
       </div>
-      <div class="ui-numbers">
+      <div class="ui-numbers ui-overlay">
         xxx objects
       </div>
     </div>
@@ -348,41 +348,39 @@ h2 input:not(:placeholder-shown) {
   transform: scale(1.1);
 }
 
-.ui-mode {
-  display: block;
-  z-index: 1000;
-  position: fixed;
-  top: 260px;
-  font-size: 18px;
-  color: white;
-  border-radius: 10px;
-  padding: 4px 10px 4px 10px;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
+.ui-overlay {
+z-index: 100;
+position:absolute;
+border-radius: 10px;
+font-size: 18px;
+font-weight: 500;
+color: white;
+background-color: rgba(0, 0, 0, 0.4);
+backdrop-filter: blur(5px);
+}
 
+.ui-mode {
+top: 260px;
+padding: 4px 10px 4px 10px;
+background-color: rgba(0, 0, 0, 0.4);
 }
 
 .ui-mode .item {
-  cursor: pointer;
-  display: inline;
-  font-weight: 400;
-  padding: 5px 15px 5px 15px;
+cursor: pointer;
+display: inline;
+padding: 0px 15px 0px 15px;
+}
+
+.ui-mode .selected{
+font-weight: 500;
+color: rgb(150,200,255);
 }
 
 .ui-numbers {
-  z-index: 100;
-  width: 120px;
-  position: absolute;
-  border-radius: 10px;
-  padding: 2px 10px 6px 10px;
-  text-align: center;
-  color: white;
-  bottom: 30px;
-  font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(5px);
-  margin-top: calc(100% - 100px);
-  font-weight: 400;
+padding: 2px 15px 6px 15px;
+text-align: center;
+bottom: 30px;
+margin-top: calc(100% - 100px);
 }
 
 
